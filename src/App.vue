@@ -1,11 +1,26 @@
 <script>
+import axios from "axios";
+import { store } from "./data/store";
+
+import AppHeader from "./components/AppHeader.vue";
+import AppMain from "./components/AppMain.vue";
+
 export default {
   data() {
-    return {};
+    return {
+      store,
+      moviesList: [],
+
+    };
   },
+  components: { AppHeader, AppMain },
 };
 </script>
 
-<template></template>
+<template>
+  <AppHeader />
 
-<style></style>
+  <AppMain />
+</template>
+
+<style lang="scss"></style>
