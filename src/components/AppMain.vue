@@ -1,16 +1,16 @@
 <script>
-import MoviesList from "./MoviesList.vue";
+import MoviesSerieTvList from "./MoviesSerieTvList.vue";
 
 export default {
   data() {
     return {};
   },
-  components: { MoviesList },
+  components: { MoviesSerieTvList },
 };
 </script>
 
 <template>
-  <MoviesList />
+  <MoviesSerieTvList />
 </template>
 
 <style lang="scss" scoped></style>
