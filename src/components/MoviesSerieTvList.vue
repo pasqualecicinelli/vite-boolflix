@@ -15,11 +15,11 @@ export default {
 
 <template>
   <div class="container">
-    <AppCard
-      v-for="movie in store.moviesList"
-      :key="movie.id"
-      :cardInfo="movie"
-    />
+   
+    <!--Passo i dati con le props -->
+    <AppCard :cardInfoMovie="store.moviesList" :cardInfoTv="store.serieTvList"/>
+
+    
   </div>
 </template>
 

@@ -4,10 +4,19 @@ import axios from "axios";
 export default {
   data() {
     return {
-      term: '',
+      term: "",
     };
   },
-  emits: ["start-search"],
+
+  methods: {
+    searchTitle() {
+      // Emetti il primo evento con il valore 'term'
+      this.$emit("start-search", this.term);
+
+      // Emetti il secondo evento con lo stesso valore 'term'
+      this.$emit("start-tv-search", this.term);
+    },
+  },
 };
 </script>
 
@@ -15,11 +24,8 @@ export default {
   <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand">Navbar</a>
-      <form
-        @submit.prevent="$emit('start-search', term)"
-        class="d-flex"
-        role="search"
-      >
+      `
+      <form @submit.prevent="searchTitle" class="d-flex" role="search">
         <input
           v-model="term"
           class="form-control me-2"
