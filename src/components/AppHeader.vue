@@ -5,17 +5,9 @@ export default {
   data() {
     return {
       term: "",
+
+      emit: ["search-title"],
     };
-  },
-
-  methods: {
-    searchTitle() {
-      // Emetti il primo evento con il valore 'term'
-      this.$emit("start-search", this.term);
-
-      // Emetti il secondo evento con lo stesso valore 'term'
-      this.$emit("start-tv-search", this.term);
-    },
   },
 };
 </script>
@@ -25,7 +17,7 @@ export default {
     <div class="container-fluid">
       <a class="navbar-brand">Navbar</a>
       `
-      <form @submit.prevent="searchTitle" class="d-flex" role="search">
+      <form @submit.prevent="$emit('search-title',term)" class="d-flex" role="search">
         <input
           v-model="term"
           class="form-control me-2"

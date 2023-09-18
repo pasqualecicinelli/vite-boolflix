@@ -7,68 +7,52 @@ export default {
   },
 
   props: {
-    cardInfoMovie: Array,
-    cardInfoTv: Array,
+    cardInfo: Object,
+  },
+  methods: {
+    getStars(stars) {
+      return stars <= this.cardInfo.vote
+        ? "fa-solid fa-star"
+        : "fa-regular fa-star";
+    },
   },
 };
 </script>
 
 <template>
   <div class="card-conteiner mt-1">
-
-    <h3 v-if="cardInfoTv.length == 0">Non ci sono Movie</h3>
-    <h3 v-else>Movie</h3>
-
-    <div class="card-body" v-for="movie in cardInfoMovie" :key="movie.id">
+    <div class="card-body">
       <ul class="card">
-        <li>Titolo: {{ movie.title }}</li>
-        <li>Titolo originale: {{ movie.original_title }}</li>
-<!--
+        <li>Titolo: {{ cardInfo.name }}</li>
+        <li>Titolo originale: {{ cardInfo.original_title }}</li>
+
+        <!--
 SE NELL'ARRAY FLAGS TROVA LA LINGUA DI MOVIE.LANGUAGE ALLORA MOSTRA L'IMG 
 ALTRIMENTI FACCIO UN ALTRO V-SHOW PER STAMPARE LA LINGUA CHE NON TROVA NELL'ARRAY
 -->
-        <li v-show="this.flags.includes(movie.language)">
+
+        <li v-show="this.flags.includes(cardInfo.language)">
           <img
             class="flagClass"
-            :src="'../../img/' + movie.language + '.png'"
-            :alt="movie.language"
+            :src="'../../img/' + cardInfo.language + '.png'"
+            :alt="cardInfo.language"
           />
         </li>
-        <li v-show="!this.flags.includes(movie.language)">
-          {{ movie.language }}
+        <li v-show="!this.flags.includes(cardInfo.language)">
+          {{ cardInfo.language }}
         </li>
 
-        <li>Voto: {{ movie.vote }}</li>
+        <li>
+          <font-awesome-icon :icon="getStars(stars)" v-for="stars in 5" />
+        </li>
 
-        <!-- <img :src="movie.poster" alt="" />-->
+        <li>Voto: {{ cardInfo.vote }}</li>
+
+        <li v-show="cardInfo.poster" class="card-img">
+          <img :src="cardInfo.poster" :alt="cardInfo.name" />
+        </li>
 
         <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-
-      </ul>
-    </div>
-
-    <h3 v-if="cardInfoMovie.length == 0">Non ci sono Serie tv</h3>
-    <h3 v-else>Serie tv</h3>
-
-    <div class="card-body" v-for="serieTv in cardInfoTv" :key="serieTv.id">
-      <ul class="card">
-        <li>Titolo: {{ serieTv.name }}</li>
-        <li>Titolo Originale: {{ serieTv.original_name }}</li>
-        <li v-show="this.flags.includes(serieTv.language)">
-          <img
-            class="flagClass"
-            :src="'../../img/' + serieTv.language + '.png'"
-            :alt="serieTv.language"
-          />
-        </li>
-        <li v-show="!this.flags.includes(serieTv.language)">
-          {{ serieTv.language }}
-        </li>
-        <li>Voto: {{ serieTv.vote }}</li>
-
-        <!-- <img :src="serieTv.poster" alt="" />-->
-
-        <!--   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
       </ul>
     </div>
   </div>
