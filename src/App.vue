@@ -7,10 +7,9 @@ import AppMain from "./components/AppMain.vue";
 
 export default {
   data() {
-    return {
-      };
+    return {};
   },
- 
+
   components: { AppHeader, AppMain },
 
   methods: {
@@ -35,8 +34,9 @@ export default {
               original_language,
               vote_average,
               poster_path,
+              overview,
             } = movie;
-            // console.log(movie);
+           //  console.log(movie);
             return {
               id,
               name: title,
@@ -44,6 +44,7 @@ export default {
               language: original_language,
               vote: Math.ceil(vote_average / 2),
               poster: "https://image.tmdb.org/t/p/w300/" + poster_path,
+              description:overview,
             };
           });
         });
@@ -68,6 +69,7 @@ export default {
               original_language,
               vote_average,
               poster_path,
+              overview,
             } = serieTv;
             // console.log(serieTv);
             //In questo caso con map (serieTv) entriamo direttamente nell'array
@@ -78,6 +80,7 @@ export default {
               language: serieTv.original_language,
               vote: Math.ceil(serieTv.vote_average / 2),
               poster: "https://image.tmdb.org/t/p/w342/" + poster_path,
+              description:overview,
             };
           });
         });
@@ -94,11 +97,15 @@ export default {
 </script>
 
 <template>
-  <div class="container-fluid">
-    <AppHeader @search-title="handleQuery" />
+  <AppHeader @search-title="handleQuery" />
+  <div class="container-fluid px-0 pt-5">
 
     <AppMain />
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+@use "../src/components/style/style.scss" as *;
+
+
+</style>
